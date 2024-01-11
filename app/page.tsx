@@ -1,5 +1,22 @@
 import { Suspense } from 'react'
 
+import { SignIn, SignOut } from '@/app/ui/buttons'
+import { auth } from '@/app/lib/auth'
+import Form from '@/app/ui/form'
+
+async function GuestbookForm() {
+  const session = await auth()
+
+  return session ? (
+    <>
+      <Form />
+      <SignOut />
+    </>
+  ) : (
+    <SignIn />
+  )
+}
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-12">
@@ -13,10 +30,10 @@ export default function Home() {
           Sign my guestbook
         </h1>
         <Suspense fallback={<p>Loading...</p>}>
-          {/* <GuestbookForm /> */}
+          <GuestbookForm />
           {/* <GuestbookEntries /> */}
         </Suspense>
       </div>
     </main>
-  );
+  )
 }

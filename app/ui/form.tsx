@@ -3,12 +3,18 @@
 import { useRef } from 'react'
 import { useFormStatus } from 'react-dom'
 
+import { saveGuestbookEntry } from '@/app/actions/guestbook'
+
 export default function Form() {
   const formRef = useRef(null)
   const { pending } = useFormStatus()
 
   return (
     <form
+      action={async (formData) => {
+        await saveGuestbookEntry(formData)
+        formRef.current?.reset()
+      }}
       className="relative max-w-[500px]"
       ref={formRef}
       style={{ opacity: !pending ? 1 : 0.7 }}
