@@ -6,7 +6,7 @@ import { useFormStatus } from 'react-dom'
 import { saveGuestbookEntry } from '@/app/actions/guestbook'
 
 export default function Form() {
-  const formRef = useRef(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
   const { pending } = useFormStatus()
 
   return (
