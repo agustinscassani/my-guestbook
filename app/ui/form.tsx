@@ -33,7 +33,7 @@ export default function Form() {
         disabled={pending}
         type="submit"
       >
-        Sign
+        {pending ? 'Signing' : 'Sign'}
       </button>
     </form>
   )
