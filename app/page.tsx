@@ -1,3 +1,4 @@
+import { sql } from '@vercel/postgres'
 import { Suspense } from 'react'
 
 import { SignIn, SignOut } from '@/app/ui/buttons'
@@ -17,6 +18,22 @@ async function GuestbookForm() {
   )
 }
 
+async function GuestbookEntries() {
+  const { rows } = await sql`SELECT * from "Guestbook" ORDER BY last_modified DESC;`
+
+  return rows.map((entry) => (
+    <div key={entry.id} className="flex flex-col space-y-1 mb-4">
+      <div className="w-full text-sm break-words">
+        <span className="text-neutral-600 dark:text-neutral-400 mr-1">
+          {entry.created_by}:
+        </span>
+
+        {entry.body}
+      </div>
+    </div>
+  ))
+}
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-12">
@@ -29,9 +46,9 @@ export default function Home() {
         <h1 className="relative font-semibold dark:drop-shadow-[0_0_0.3rem_#ffffff70] text-2xl mb-8 tracking-tighter">
           Sign my guestbook
         </h1>
+        <GuestbookForm />
         <Suspense fallback={<p>Loading...</p>}>
-          <GuestbookForm />
-          {/* <GuestbookEntries /> */}
+          <GuestbookEntries />
         </Suspense>
       </div>
     </main>

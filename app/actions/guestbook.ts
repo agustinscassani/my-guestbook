@@ -19,5 +19,5 @@ export async function saveGuestbookEntry(formData: FormData) {
 
   await sql`INSERT INTO "Guestbook" (email, created_by, body, last_modified) VALUES (${email}, ${created_by}, ${body}, ${new Date().toISOString()})`
 
-  revalidatePath("/")
+  revalidatePath('/')
 }
