@@ -1,11 +1,21 @@
+'use client'
+
+import { useRef } from 'react'
+
 import { saveGuestbookEntry } from '@/app/actions/guestbook'
 import { SubmitButton } from '@/app/ui/buttons'
 
 export default function Form() {
+  const formRef = useRef<HTMLFormElement>(null)
+
   return (
     <form
-      action={saveGuestbookEntry}
+      action={async (formData) => {
+        await saveGuestbookEntry(formData)
+        formRef.current?.reset()
+      }}
       className='relative max-w-[500px]'
+      ref={formRef}
     >
       <input
         aria-label='Your message'
