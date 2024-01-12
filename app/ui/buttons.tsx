@@ -1,6 +1,7 @@
 'use client'
 
 import { signIn, signOut } from 'next-auth/react'
+import { useFormStatus } from 'react-dom'
 
 function GitHubIcon() {
   return (
@@ -26,14 +27,6 @@ function GitHubIcon() {
   )
 }
 
-export function SignOut() {
-  return (
-    <button className='text-xs text-neutral-700 dark:text-neutral-300 mt-2 mb-6' onClick={() => signOut()}>
-      Sign out
-    </button>
-  )
-}
-
 export function SignIn() {
   return (
     <button
@@ -42,6 +35,28 @@ export function SignIn() {
     >
       <GitHubIcon />
       <div className='ml-3'>Sign in with GitHub</div>
+    </button>
+  )
+}
+
+export function SignOut() {
+  return (
+    <button className='text-xs text-neutral-700 dark:text-neutral-300 mt-2 mb-6' onClick={() => signOut()}>
+      Sign out
+    </button>
+  )
+}
+
+export function SubmitButton() {
+  const { pending } = useFormStatus()
+
+  return (
+    <button
+      className='flex items-center justify-center absolute right-1 top-1 px-2 py-1 font-medium h-8 bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 rounded w-16'
+      disabled={pending}
+      type='submit'
+    >
+      Sign
     </button>
   )
 }

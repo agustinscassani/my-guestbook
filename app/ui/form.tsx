@@ -1,35 +1,11 @@
-'use client'
-
-import { useRef } from 'react'
-import { useFormStatus } from 'react-dom'
-
 import { saveGuestbookEntry } from '@/app/actions/guestbook'
-
-function SubmitButton() {
-  const { pending } = useFormStatus()
-
-  return (
-    <button
-      className='flex items-center justify-center absolute right-1 top-1 px-2 py-1 font-medium h-8 bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 rounded w-16'
-      disabled={pending}
-      type='submit'
-    >
-      Sign
-    </button>
-  )
-}
+import { SubmitButton } from '@/app/ui/buttons'
 
 export default function Form() {
-  const formRef = useRef<HTMLFormElement>(null)
-
   return (
     <form
-      action={async (formData) => {
-        await saveGuestbookEntry(formData)
-        formRef.current?.reset()
-      }}
+      action={async (formData) => await saveGuestbookEntry(formData)}
       className='relative max-w-[500px]'
-      ref={formRef}
     >
       <input
         aria-label='Your message'
