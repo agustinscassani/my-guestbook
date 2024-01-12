@@ -4,7 +4,7 @@ import { SubmitButton } from '@/app/ui/buttons'
 export default function Form() {
   return (
     <form
-      action={async (formData) => await saveGuestbookEntry(formData)}
+      action={saveGuestbookEntry}
       className='relative max-w-[500px]'
     >
       <input

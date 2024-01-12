@@ -45,8 +45,8 @@ export default function Home() {
         <h1 className='relative font-semibold dark:drop-shadow-[0_0_0.3rem_#ffffff70] text-2xl mb-8 tracking-tighter'>
           Sign my guestbook
         </h1>
+        <GuestbookForm />
         <Suspense fallback={<p>loading...</p>}>
-          <GuestbookForm />
           <GuestbookEntries />
         </Suspense>
       </div>
